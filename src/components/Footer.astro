@@ -37,7 +37,9 @@ const { filter } = Astro.locals;
     </li>
   </ul>
 
-  {getCompletedItemsCount() > 0 && <ClearCompleted />}
+  <div class="mt-8">
+    {getCompletedItemsCount() > 0 && <ClearCompleted />}
+  </div>
 </footer>
 
 <style>
