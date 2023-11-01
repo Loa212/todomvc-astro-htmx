@@ -21,7 +21,7 @@ if (!todo) {
     <input
       disabled
       type="checkbox"
-      class="opacity-0"
+      class="opacity-0 m-4"
       hx-patch={`/partials/todos/${todo.id}`}
       checked={todo.done}
       hx-target={`#todo-${todo.id}`}
