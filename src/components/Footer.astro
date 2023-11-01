@@ -9,20 +9,29 @@ const { filter } = Astro.locals;
 <footer class="footer" id="footer" hx-swap-oob="true">
   <ItemCount itemCount={getActiveItemsCount()} />
 
-  <ul class="filters">
-    <li>
-      <a href="/?filter=all" class:list={{ selected: filter === "all" }}>
+  <ul class="flex items-center justify-between gap-4 mt-6">
+    <!-- <button class="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Button</button> -->
+
+    <li class="w-full">
+      <a
+        href="/?filter=all"
+        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class:list={{ selected: filter === "all" }}
+      >
         All
       </a>
     </li>
-    <li>
-      <a href="/?filter=active" class:list={{ selected: filter === "active" }}
-        >Active</a
+    <li class="w-full">
+      <a
+        href="/?filter=active"
+        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class:list={{ selected: filter === "active" }}>Active</a
       >
     </li>
-    <li>
+    <li class="w-full">
       <a
         href="/?filter=completed"
+        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "completed" }}>Completed</a
       >
     </li>
@@ -30,3 +39,9 @@ const { filter } = Astro.locals;
 
   {getCompletedItemsCount() > 0 && <ClearCompleted />}
 </footer>
+
+<style>
+  .selected {
+    @apply text-white bg-green-600;
+  }
+</style>
