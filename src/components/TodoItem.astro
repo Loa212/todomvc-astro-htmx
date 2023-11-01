@@ -1,5 +1,6 @@
 ---
 import type { Todo } from "../data/todos";
+import { Trash2 } from "./icons";
 
 export interface Props {
   todo: Todo;
@@ -9,7 +10,7 @@ const { todo } = Astro.props;
 ---
 
 <li id={`todo-${todo.id}`} class:list={{ completed: todo.done === true }}>
-  <div class="view">
+  <div class="flex items-center justify-between gap-4">
     <input
       type="checkbox"
       class="toggle"
@@ -19,13 +20,17 @@ const { todo } = Astro.props;
       hx-swap="outerHTML"
     />
     <label
+      class="w-full cursor-text hover:ring-1 ring-slate-700/10 rounded-sm px-2"
       hx-get={`/partials/todos/edit/${todo.id}`}
       hx-target={`#todo-${todo.id}`}
       hx-swap="outerHTML"><strong>{todo.name}</strong></label
     >
     <button
-      class="destroy"
+      class="bg-red-600 text-white p-1 rounded-md"
       hx-delete={`/partials/todos/${todo.id}`}
-      _={`on htmx:afterOnLoad remove #todo-${todo.id}`}></button>
+      _={`on htmx:afterOnLoad remove #todo-${todo.id}`}
+    >
+      <Trash2 size={14} />
+    </button>
   </div>
 </li>

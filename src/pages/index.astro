@@ -45,7 +45,16 @@ const todos = getTodos(filter);
         <input type="checkbox" id="toggle-all" class="toggle-all" />
         <label for="toggle-all">Mark all as complete</label>
       -->
-        <ul id="todo-list" class="todo-list">
+
+        <div
+          class="flex font-bold text-green-700 text-sm items-center justify-between gap-4"
+        >
+          <span>status</span>
+          <span class="grow">details</span>
+          <span>delete</span>
+        </div>
+
+        <ul id="todo-list" class="my-6 space-y-3">
           <TodoList {todos} />
         </ul>
       </section>
