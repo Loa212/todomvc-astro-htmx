@@ -10,34 +10,47 @@ const todos = getTodos(filter);
 ---
 
 <Layout>
-  <section class="todoapp" hx-vals={`{ "filter": "${Astro.locals.filter}" }`}>
-    <header class="header">
-      <h1>Todos</h1>
-      <form
-        hx-post="/partials/todos"
-        hx-target="#todo-list"
-        hx-swap="afterbegin"
-        _="on htmx:afterOnLoad set #txtTodo.value to ''"
-      >
-        <input
-          type="text"
-          id="txtTodo"
-          class="new-todo"
-          name="todo"
-          placeholder="What needs to be done?"
-          autofocus
-        />
-      </form>
-    </header>
-    <section class="main">
-      <!-- TODO: add "toggle all" functionality
-      <input type="checkbox" id="toggle-all" class="toggle-all" />
-      <label for="toggle-all">Mark all as complete</label>
+  <main
+    class="h-full w-full flex flex-col items-center lg:max-w-5xl mx-auto p-2 lg:p-8"
+  >
+    <section
+      class="ring-1 ring-slate-700/20 shadow-sm px-4 lg:px-14 py-8 bg-white rounded-md"
+      hx-vals={`{ "filter": "${Astro.locals.filter}" }`}
+    >
+      <header>
+        <h1 class="pb-4">Todos</h1>
+        <form
+          hx-post="/partials/todos"
+          hx-target="#todo-list"
+          hx-swap="afterbegin"
+          _="on htmx:afterOnLoad set #txtTodo.value to ''"
+        >
+          <div class="relative mb-4">
+            <label for="txtTodo" class="leading-7 text-sm text-gray-600"
+              >What needs to be done?</label
+            >
+            <input
+              type="text"
+              id="txtTodo"
+              name="todo"
+              placeholder="What needs to be done?"
+              class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              autofocus
+            />
+          </div>
+        </form>
+      </header>
+      <section class="main">
+        <!-- TODO: add "toggle all" functionality
+        <input type="checkbox" id="toggle-all" class="toggle-all" />
+        <label for="toggle-all">Mark all as complete</label>
       -->
-      <ul id="todo-list" class="todo-list">
-        <TodoList {todos} />
-      </ul>
+
+        <ul id="todo-list" class="my-6 space-y-3">
+          <TodoList {todos} />
+        </ul>
+      </section>
+      <Footer />
     </section>
-    <Footer />
-  </section>
+  </main>
 </Layout>

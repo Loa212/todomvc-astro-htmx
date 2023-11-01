@@ -1,27 +1,60 @@
 ---
-import '../styles/todomvc-common/base.css'
-import '../styles/todomvc-app-css/index.css'
+import { Github } from "../components/icons";
+import GlobalStyles from "../pages/partials/_global-styles.astro";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro • TodoMVC</title>
-</head>
-<body>
+  </head>
+  <body>
     <slot />
 
+    <footer class="text-white text-center max-w-6xl mx-auto">
+      <p>
+        You can click on any todo <strong>title</strong> to edit it.
+      </p>
 
-    <footer class="info">
-        <p>Click to edit a todo</p>
-        <p>Created by <a href="https://tonysull.co">Tony Sullivan</a></p>
-        <p>Part of <a href="https://todomvc.com">TodoMVC</a></p>
-      </footer>
+      <ul class="mt-6 grid lg:grid-cols-3 gap-6">
+        <li class="lg:text-start">
+          Forked from{" "}
+          <a
+            target="_blank"
+            class="hover:underline underline-offset-4"
+            href="https://github.com/tony-sull/todomvc-astro-htmx"
+            >tony-sull/todomvc-astro-htmx</a
+          >
+        </li>
+
+        <li>
+          <a
+            target="_blank"
+            class="hover:underline underline-offset-4 flex items-center justify-center gap-2"
+            href="https://github.com/Loa212"
+            >Checkout my
+            <Github />
+          </a>
+        </li>
+
+        <li class="lg:text-end">
+          <a
+            target="_blank"
+            class="hover:underline underline-offset-4"
+            href="https://github.com/Loa212/todomvc-astro-htmx"
+          >
+            Checkout this project on Github
+          </a>
+        </li>
+      </ul>
+    </footer>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-</body>
+  </body>
 </html>
+
+<GlobalStyles />

@@ -1,5 +1,6 @@
 ---
 import Footer from "../../components/Footer.astro";
+import GlobalStyles from "./_global-styles.astro";
 
 // Convenience wrapper to make sure the footer is always updated when
 // a partial request changes the list of todos
@@ -8,5 +9,6 @@ import Footer from "../../components/Footer.astro";
 // of the UI need to leverage out-of-band updates later
 ---
 
+<GlobalStyles />
 <Footer />
 <slot />

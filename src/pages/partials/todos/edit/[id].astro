@@ -1,21 +1,52 @@
 ---
-import { getTodoById } from '../../../../data/todos'
+import { getTodoById } from "../../../../data/todos";
 
-export const partial = true
+export const partial = true;
 
-if (Astro.request.method !== 'GET') {
-    return Astro.redirect(null, 404)
+if (Astro.request.method !== "GET") {
+  return Astro.redirect(null, 404);
 }
 
-const { id } = Astro.params as { id: string }
+const { id } = Astro.params as { id: string };
 
-const todo = getTodoById(id)
+const todo = getTodoById(id);
 
 if (!todo) {
-    return Astro.redirect(null, 404)
+  return Astro.redirect(null, 404);
 }
 ---
 
-<form hx-post={`/partials/todos/update/${id}`}>
-    <input type="text" name="text" value={todo.name} class="edit">
+<form id={`edit-${id}`} hx-post={`/partials/todos/update/${id}`}>
+  <div class="flex items-center justify-between gap-4">
+    <input
+      disabled
+      type="checkbox"
+      class="opacity-0 m-4"
+      hx-patch={`/partials/todos/${todo.id}`}
+      checked={todo.done}
+      hx-target={`#todo-${todo.id}`}
+      hx-swap="outerHTML"
+    />
+    <input
+      _={`
+        on keyup
+         if the event's key is 'Escape'
+           send submit to my form
+         end
+        on click from elsewhere send submit to my form
+    `}
+      type="text"
+      name="text"
+      value={todo.name}
+      class="grow px-2"
+      autofocus
+    />
+
+    <button
+      type="submit"
+      class="bg-green-600 text-white px-4 py-1 text-sm rounded-md"
+    >
+      save
+    </button>
+  </div>
 </form>

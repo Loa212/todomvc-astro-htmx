@@ -9,24 +9,39 @@ const { filter } = Astro.locals;
 <footer class="footer" id="footer" hx-swap-oob="true">
   <ItemCount itemCount={getActiveItemsCount()} />
 
-  <ul class="filters">
+  <ul class="grid lg:grid-cols-3 gap-4 mt-6">
     <li>
-      <a href="/?filter=all" class:list={{ selected: filter === "all" }}>
+      <a
+        href="/?filter=all"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class:list={{ selected: filter === "all" }}
+      >
         All
       </a>
     </li>
-    <li>
-      <a href="/?filter=active" class:list={{ selected: filter === "active" }}
-        >Active</a
+    <li class="w-full">
+      <a
+        href="/?filter=active"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class:list={{ selected: filter === "active" }}>Active</a
       >
     </li>
-    <li>
+    <li class="w-full">
       <a
         href="/?filter=completed"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "completed" }}>Completed</a
       >
     </li>
   </ul>
 
-  {getCompletedItemsCount() > 0 && <ClearCompleted />}
+  <div class="mt-8">
+    {getCompletedItemsCount() > 0 && <ClearCompleted />}
+  </div>
 </footer>
+
+<style>
+  .selected {
+    @apply text-white bg-green-600;
+  }
+</style>
