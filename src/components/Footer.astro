@@ -9,13 +9,11 @@ const { filter } = Astro.locals;
 <footer class="footer" id="footer" hx-swap-oob="true">
   <ItemCount itemCount={getActiveItemsCount()} />
 
-  <ul class="flex items-center justify-between gap-4 mt-6">
-    <!-- <button class="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Button</button> -->
-
-    <li class="w-full">
+  <ul class="grid lg:grid-cols-3 gap-4 mt-6">
+    <li>
       <a
         href="/?filter=all"
-        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "all" }}
       >
         All
@@ -24,14 +22,14 @@ const { filter } = Astro.locals;
     <li class="w-full">
       <a
         href="/?filter=active"
-        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "active" }}>Active</a
       >
     </li>
     <li class="w-full">
       <a
         href="/?filter=completed"
-        class="font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "completed" }}>Completed</a
       >
     </li>
