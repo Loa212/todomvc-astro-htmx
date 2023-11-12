@@ -30,7 +30,7 @@ export function getTodos(filter: TodoFilter) {
 }
 
 export function getTodoById(id: string) {
-  return todos.find((todo) => todo.id === id)
+  return todos.find((todo) => todo.id === id);
 }
 
 export function getItemsLeft() {
@@ -61,14 +61,14 @@ export function deleteById(id: string) {
   todos = todos.filter((todo) => todo.id !== id);
 }
 
-export function updateTodo(id: string, data: Partial<Exclude<Todo, "id">>) {
+export function updateTodo(id: string, data: Partial<Omit<Todo, "id">>) {
   const index = todos.findIndex((todo) => todo.id === id);
 
   if (index >= 0) {
     todos[index] = {
       ...todos[index],
       ...data,
-    };
+    } as Todo; // Cast the object to Todo type
     return todos[index]!;
   }
 
