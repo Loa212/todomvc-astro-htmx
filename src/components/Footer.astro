@@ -13,7 +13,7 @@ const { filter } = Astro.locals;
     <li>
       <a
         href="/?filter=all"
-        class="block font-bold text-center text-green-950 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
+        class="block font-bold text-center text-green-900 cursor-pointer ring hover:ring-4 ring-green-600 py-2 px-6 rounded text-md"
         class:list={{ selected: filter === "all" }}
       >
         All
@@ -42,6 +42,6 @@ const { filter } = Astro.locals;
 
 <style>
   .selected {
-    @apply text-white bg-green-600;
+    @apply text-white bg-green-700;
   }
 </style>
