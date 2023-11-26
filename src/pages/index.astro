@@ -14,9 +14,10 @@ const todos = getTodos(filter);
     class="h-full w-full flex flex-col items-center lg:max-w-5xl mx-auto p-2 lg:p-8"
   >
     <section
-      class="ring-1 ring-slate-700/20 shadow-sm px-4 lg:px-14 py-8 bg-white rounded-md"
+      class="relative ring-1 ring-slate-700/20 shadow-sm px-4 lg:px-14 py-8 bg-white rounded-md"
       hx-vals={`{ "filter": "${Astro.locals.filter}" }`}
     >
+      <div id="user-btn-wrapper" class="absolute end-2 top-2"></div>
       <header>
         <h1 class="pb-4">Todos</h1>
         <form
@@ -54,3 +55,49 @@ const todos = getTodos(filter);
     </section>
   </main>
 </Layout>
+
+<script>
+  import Clerk from "@clerk/clerk-js";
+
+  // document loaded
+  document.addEventListener("DOMContentLoaded", async () => {
+    document.querySelector<HTMLDivElement>("#user-btn-wrapper")!.innerHTML = `
+  <div
+    id="user-button"
+  ></div>
+`;
+
+    // focus on the input
+    const userButtonComponent =
+      document.querySelector<HTMLDivElement>("#user-button")!;
+
+    const clerkPublishableKey = import.meta.env.PUBLIC_CLERK_PUBLIC_KEY;
+    const clerk = new Clerk(clerkPublishableKey);
+    await clerk.load();
+
+    const sessionId = clerk.user?.id;
+
+    if (sessionId) {
+      clerk.mountUserButton(userButtonComponent, {
+        afterSignOutUrl: "/",
+      });
+    } else {
+      // add button to mount sign in
+      userButtonComponent.innerHTML = `
+    <button
+      id="sign-in-button"
+      class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+    >
+      Sign in
+    </button>
+  `;
+
+      const signInButton =
+        document.querySelector<HTMLButtonElement>("#sign-in-button")!;
+
+      signInButton.addEventListener("click", () => {
+        clerk.openSignIn();
+      });
+    }
+  });
+</script>
